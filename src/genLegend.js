@@ -13,7 +13,7 @@ var user = process.env.USERNAME || process.env.USER;
 var userParams = {};
 var command = require('./command');
 var tplreq = require('./tplreq');
-
+var filegen = require('./filegen');
 
 console.log(yosay(chalk.green('To Geneate tempatle....')));
 
@@ -28,9 +28,12 @@ else {
 }
 
 command.getParams(userParams, function (userParams) {
-    console.log("sdfs=> " + JSON.stringify(userParams));
-
-    tplreq.getConfig();
+    // console.log("sdfs=> " + JSON.stringify(userParams));
+    tplreq.getConfig(userParams).done(function (result) {
+        // console.log(result);
+        // filegen.genControl(userParams, result);
+        filegen.genTempete(userParams, result);
+    });
 });
 
 

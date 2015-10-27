@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shibiaoz/h5gen.git"
+    "url": "https://github.com/shibiaoz/h5gen.git"
   },
   "keywords": [
     "h5gen"

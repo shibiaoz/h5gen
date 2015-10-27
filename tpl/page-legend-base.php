@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -85,59 +84,12 @@ if (isset($helperJsUrl)) {
   !function(){if("undefined"!=typeof alog){var e=localStorage,t=e.legendUser;(!t||t.length>30)&&(t=e.legendUser=Number(new Date).toString(36)+Math.random().toString(36).slice(3,7)),alog("tr.create",{postUrl:"http://socketapi.duapp.com/pv/<?php echo htmlentities($legendId) ?>/"+t}),alog("tr.send","pageview")}}();
   </script>
 <?php
-  require_once "../../api/weixin/jssdk.php";
-  $jssdk = new JSSDK("wx4e6d06a8da838387", "87c309d2109a6d971e83a736ea189f50");
-  $signPackage = $jssdk->GetSignPackage();
+  $legendData = $legendData;
 ?>
 <script src="http://static2.searchbox.baidu.com/static/searchbox/openjs/aio.js?t=20150907"></script>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<<script src = "<?= $legendConfig['mainJsUrl']?>"></script>
 <script>
-(function(){
-  var url = window.location.href;
-  window.weixinShareData = {
-      title:  '<?php echo $title;?>',
-      desc:   '<?php echo $description;?>',
-      imgUrl: '<?php echo $iconUrl;?>',
-      link:   url.substr(0, url.indexOf('#')) || url
-  };
-  wx.config({
-    appId: '<?php echo $signPackage["appId"];?>',
-    timestamp: <?php echo $signPackage["timestamp"];?>,
-    nonceStr: '<?php echo $signPackage["nonceStr"];?>',
-    signature: '<?php echo $signPackage["signature"];?>',
-    jsApiList: [
-        'onMenuShareTimeline',
-        'onMenuShareAppMessage'
-    ]
-  });
-  wx.ready(function () {
-    wx.onMenuShareTimeline(window.weixinShareData);
-    wx.onMenuShareAppMessage(window.weixinShareData);
-  });
-  var baiduShareData = {
-      title:    weixinShareData.title || '',
-      content:  weixinShareData.desc || '',
-      iconUrl:  weixinShareData.imgUrl || '',
-      linkUrl:  weixinShareData.link || ''
-  };
-  function initBaiduShare(){
-      if(!window.Box) return;
-      Box.nativeShare(baiduShareData);
-  }
-  initBaiduShare();
-  window.invokeBaiduShare = function (){
-      baiduShareData.mediaType = 'all';
-      if(!window.Box) return;
-      if(Box.os.android){
-          Box.android.invokeApp('Bdbox_android_utils', 'callShare', [JSON.stringify(baiduShareData), window.successFnName || 'console.log', window.errorFnName || 'console.log']);
-      }else{
-          Box.ios.invokeApp('callShare', {
-              options: encodeURIComponent(JSON.stringify(baiduShareData)),
-              errorcallback: 'onFail' ,
-              successcallback: 'onSuccess'
-          });
-      }
-  }
-})();
+var data = <?= json_encode($legendData);?>
+legend.init(data);
 </script>
 </html>
