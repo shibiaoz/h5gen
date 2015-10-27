@@ -25,7 +25,7 @@ exports.genControl = function (userParams, pageConfig) {
 
 exports.genTempete = function (userParams, pageConfig) {
     console.log(chalk.red('pwd => ' + pwd));
-    console.log(chalk.red('__dirname => ' + path.join(__dirname, "../src")));
+    console.log(chalk.red('__dirname => ' + path.join(__dirname, "")));
     return;
     var pageName = pageConfig && (pageConfig.name || pageConfig.title || 'test');
     var templateDir = path.relative(pwd, '../template/' + pageName);
