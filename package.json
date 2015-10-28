@@ -1,6 +1,6 @@
 {
   "name": "h5gen",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "h5 gen script",
   "main": "src/genLegend.js",
   "bin": {
@@ -25,14 +25,18 @@
   "dependencies": {
     "chalk": "^1.1.1",
     "inquirer": "^0.11.0",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
     "q": "^1.4.1",
-    "shelljs": "^0.5.3",
-    "yosay": "^1.0.5"
+    "shelljs": "^0.5.3"
   },
   "devDependencies": {
     "asciimo": "^0.3.1",
     "inquirer": "^0.11.0",
+    "js2php": "^0.1.0",
+    "lodash": "^3.10.1",
     "optimist": "^0.6.1",
+    "php-unserialize": "0.0.1",
     "prompt": "^0.2.14",
     "q": "^1.4.1"
   }

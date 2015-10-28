@@ -84,12 +84,12 @@ if (isset($helperJsUrl)) {
   !function(){if("undefined"!=typeof alog){var e=localStorage,t=e.legendUser;(!t||t.length>30)&&(t=e.legendUser=Number(new Date).toString(36)+Math.random().toString(36).slice(3,7)),alog("tr.create",{postUrl:"http://socketapi.duapp.com/pv/<?php echo htmlentities($legendId) ?>/"+t}),alog("tr.send","pageview")}}();
   </script>
 <?php
-  $legendData = $legendData;
+  $data = $data;
 ?>
 <script src="http://static2.searchbox.baidu.com/static/searchbox/openjs/aio.js?t=20150907"></script>
 <<script src = "<?= $legendConfig['mainJsUrl']?>"></script>
 <script>
-var data = <?= json_encode($legendData);?>
+var data = <?= json_encode($data);?>
 legend.init(data);
 </script>
 </html>

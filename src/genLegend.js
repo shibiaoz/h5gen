@@ -2,7 +2,7 @@
 
 var shell = require('shelljs');
 var chalk = require('chalk');
-var yosay = require('yosay');
+// var yosay = require('yosay');
 var path = require('path');
 var readline = require('readline');
 var inquirer = require('inquirer');
@@ -36,7 +36,7 @@ command.getParams(userParams, function (userParams) {
     // console.log("sdfs=> " + JSON.stringify(userParams));
     tplreq.getConfig(userParams).done(function (result) {
         // console.log(result);
-        // filegen.genControl(userParams, result);
+        filegen.genControl(userParams, result);
         filegen.genTempete(userParams, result);
     });
 });
