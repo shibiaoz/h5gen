@@ -8,21 +8,33 @@
 
 "use strict";
 
+var debug = false;
 var chalk = require('chalk');
 var http = require('http');
 var querystring = require('querystring');
 var Q = require('q');
+
+// 构建请求的url对应关系
+var CONGIGURL = {
+    "legend": 'http://cp01-hj-lh-sandbox-tech00.epc.baidu.com:8081/gen/page?',
+    "page": '',
+    "page-widget": '',
+}
+if (debug) {
+    CONGIGURL['legend'] = 'http://127.0.0.1:8081/gen/page?';
+}
 exports.getConfig = function  (config, callback) {
     var deferred = Q.defer();
     var reqObj = {
-        pageType: config.pageid || '',
-        id: '28d4f3ca-7643-11e5-85d7-70e2840c1e14',
-        _data: 1,
+        pageType: config.pageType || '',
+        pageid: config.pageid,
+        author: config.author,
     };
     let paramstring = querystring.stringify(reqObj);
-    let prefixUrl = 'http://shushuo.baidu.com/legend/dev/?';
+    let prefixUrl = CONGIGURL[config.pageType];
     let url = prefixUrl + paramstring;
-    console.log(chalk.red(paramstring));
+    console.log(chalk.red('输入参数=> ' + paramstring));
+    console.log('url前缀' + prefixUrl);
     var httpReq = http.get(url);
     httpReq.on('error', function (e) {
         console.log(chalk.red('httpReq error => ' + e.message));
@@ -36,11 +48,12 @@ exports.getConfig = function  (config, callback) {
         response.on('end', function () {
             // deferred.resolve(resText);
             try {
+                console.log(chalk.red("请求系统数据成功...."));
                 deferred.resolve(JSON.parse(resText));
             }
             catch(e) {
                 deferred.reject(e);
-                console.error('error in httpreq => ' + e);
+                console.log(chalk.red("请求系统数据失败或Parse 系统JSON士标...."));
             }
         });
     });

@@ -11,7 +11,7 @@ function getParams (userParams, callback) {
         {
             type: "list",
             name: "pageType",
-            message: chalk.yellow('selec your template type => '),
+            message: chalk.yellow('选择页面类型 => '),
             choices: [ "legend", "page", "page-widget"],
             default: 'page',
             filter: function( val ) { return val.toLowerCase(); }
@@ -19,7 +19,7 @@ function getParams (userParams, callback) {
         {
             type: 'input',
             name: 'pageid',
-            message: chalk.yellow('give me your pageid from h5 system => '),
+            message: chalk.yellow('页面_id => '),
             filter: function (val) {
                 return val.trim().toLowerCase();
             }
@@ -27,7 +27,7 @@ function getParams (userParams, callback) {
         {
             type: 'input',
             name: 'author',
-            message: 'author',
+            message: '作者',
             default: user,
             filter: function (val) {
                 return val.trim().toLowerCase() || user;

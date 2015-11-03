@@ -1,6 +1,6 @@
 {
   "name": "h5gen",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "h5 gen script",
   "main": "src/genLegend.js",
   "bin": {

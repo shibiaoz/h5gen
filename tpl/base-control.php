@@ -37,7 +37,7 @@ $pageConfig = <%=pageConfig%>;
  * 在这里自定义的业务逻辑，把所有的数据处理放在control来处理
  * 不去手动改变lgend的模板数据
  */
-
+$pageConfig['iconUrl'] = 'http://static.tieba.baidu.com/tb/mobile/sglobal/layout/classic/icon/apple-touch-icon-144x144-precomposed_08a91b3.png';
 
 /**
  * pageConfig,
@@ -48,3 +48,4 @@ foreach ($pageConfig as $key => $value) {
     $this->assign($key, $value);
 }
 $this->display("<%=template%>");
+?>

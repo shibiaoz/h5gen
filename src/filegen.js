@@ -16,7 +16,7 @@ var TMLPATH = path.join(__dirname, '../tpl/page-legend-base.php');
 var CONTROLPATH = path.join(__dirname, '../tpl/base-control.php');
 var user = process.env.USERNAME || process.env.USER;
 
-function getDataJs (jsUrl) {
+function getData (jsUrl) {
     var promise = Q.promise(function (resolve, reject, notify) {
         http.get(jsUrl, function (response) {
             let resTxt = '';
@@ -45,8 +45,8 @@ function getDataJs (jsUrl) {
 exports.genControl = function (userParams, pageConfig) {
     console.log(chalk.yellow('function genControl...'));
     var deferred = Q.defer();
-    pageConfig.name = 'gen-legend-tpl';
-    var pageName = pageConfig && (pageConfig.name || pageConfig.title);
+    // pageConfig.name = 'test';
+    var pageName = pageConfig && (pageConfig.name || pageConfig.desp || 'test');
     var controlTplStr = fs.readFileSync(CONTROLPATH).toString();
     var desControlPath = path.join(pwd, 'control/' + pageName + FILESUFFIX);
     pageConfig.data = {}; // 扩展pageconfig的值
@@ -61,58 +61,36 @@ exports.genControl = function (userParams, pageConfig) {
         pageConfig: '',
     };
 
-    // promise q 不能用fail 不知道为啥，mark下稍后研究下
-    //
-    getDataJs(dataJsUrl).then(function (jsStr) {
-        console.log(chalk.yellow('function getDataJs done...'));
-        var reg = /legend\.init\((.*)\)/gmi;
-        var result = jsStr.replace(reg, function  (s0, s1) {
-            return s1;
+    data.pageConfig = js2php(pageConfig);
+    // 读取模板文件，替换值，写入工程的control中
+    if (controlTplStr) {
+        var toWriteStr = tplEng.strRep(controlTplStr, data);
+        fs.writeFile(desControlPath, toWriteStr, function (err) {
+            if (err) throw err;
+            console.log(chalk.green('writeFile control done...'));
+            deferred.resolve('success');
         });
-        var dataStr = result.substring(0, result.lastIndexOf(','));
 
-        // 这里之前饭了一个错误，是dataStr 用JSON.stringify之后又parse
-        // 然后传给js2php 就导致无法正确的解析js => php
-        // 主要应该还是字符中双引号的问题，待研究
-
-        pageConfig.data = JSON.parse(dataStr);
-        data.pageConfig = js2php(pageConfig);
-        console.log(chalk.red('js to php ....'));
-
-        // 读取模板文件，替换值，写入工程的control中
-        if (controlTplStr) {
-            var toWriteStr = tplEng.strRep(controlTplStr, data);
-            console.log(chalk.green(toWriteStr));
-            fs.writeFile(desControlPath, toWriteStr, function (err) {
-                if (err) throw err;
-                console.log(chalk.green('writeFile control done...'));
-                deferred.resolve('success');
-            });
-
-        }
-        else {
-            deferred.reject('read control tpl error');
-        }
-
-    }, function (err) {
-        console.log(err);
-    });
+    }
+    else {
+        deferred.reject('read control tpl error');
+    }
 
     return deferred.promise;
 }
 
 exports.genTempete = function (userParams, pageConfig) {
-    console.log(chalk.red('pwd => ' + pwd));
-
+    console.log(chalk.green('filegen => genTempete '));
+    // console.log(chalk.red(' 当前所在路径 => ' + pwd));
     // __dirname就是这个packaged 当前执行文件所在文件夹  绝对路径
     // pwd 是当前脚本执行路径
     // console.log(chalk.red('__dirname => ' + path.join(__dirname, "")));
-    pageConfig.name = 'gen-legend-tpl';
-    var pageName = pageConfig && (pageConfig.name || pageConfig.title || 'test');
+    // pageConfig.name = 'test';
+    var pageName = pageConfig && (pageConfig.name || pageConfig.desp || 'test');
     var templateDir = path.relative(pwd, 'template/' + pageName);
     var templatePath = path.relative(pwd, templateDir + '/' + pageName + FILESUFFIX);
     var isFileExists = shell.test('-f', templatePath);
-    console.log(chalk.red( templatePath + '=> ' + isFileExists));
+    console.log(chalk.red( templatePath + '=> is exists ' + isFileExists));
     var cpFun = function (src, dest) {
         shell.mkdir('-p', templateDir);
         shell.cp('-f', TMLPATH , templatePath);
@@ -135,4 +113,4 @@ exports.genTempete = function (userParams, pageConfig) {
         });
     }
 }
-exports.getDataJs = getDataJs;
+exports.getData = getData;

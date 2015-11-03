@@ -23,18 +23,23 @@ mysay.say();
 
 // 判断路径是否是可执行目录，通过判断是否找到deplay-conf.js来判断
 var deployConf = path.relative(pwd, 'deploy-conf.js');
-console.log(chalk.red('pwd => ' + pwd));
+console.log(chalk.green(' 当前所在路径 => ' + pwd));
 if (fs.existsSync(deployConf)) {
-    console.log(chalk.red(deployConf+ ' => exists'));
+    console.log(chalk.green(deployConf+ ' =>  配置文件存在，位置是对的'));
 }
 else {
-    console.log(chalk.yellow(deployConf+ ' => not exists'));
+    console.log(chalk.yellow(deployConf+ ' => 配置deploy-conf文件不存在或者运行位置不对'));
     shell.exit(1);
 }
-
+/**
+ * userParams 用户输入的
+ * @param
+ */
 command.getParams(userParams, function (userParams) {
-    // console.log("sdfs=> " + JSON.stringify(userParams));
+    console.log('进入命令行回调处理');
+    // 从系统中拉取数据配置
     tplreq.getConfig(userParams).done(function (result) {
+        // resutlt 是指 请求
         // console.log(result);
         filegen.genControl(userParams, result);
         filegen.genTempete(userParams, result);
