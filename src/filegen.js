@@ -45,12 +45,16 @@ function getData (jsUrl) {
 exports.genControl = function (userParams, pageConfig) {
     console.log(chalk.yellow('function genControl...'));
     var deferred = Q.defer();
+    // console.log('------------');
+    // console.log(pageConfig);
+    // console.log('------------');
+
     // pageConfig.name = 'test';
     var pageName = pageConfig && (pageConfig.name || pageConfig.desp || 'test');
     var controlTplStr = fs.readFileSync(CONTROLPATH).toString();
     var desControlPath = path.join(pwd, 'control/' + pageName + FILESUFFIX);
-    pageConfig.data = {}; // 扩展pageconfig的值
-    var dataJsUrl = pageConfig && pageConfig['dataJsUrl'];
+    // pageConfig.data = {}; // 扩展pageconfig的值
+    // var dataJsUrl = pageConfig && pageConfig['dataJsUrl'];
 
     // 与模板替换的数据源
     var data = {

@@ -73,7 +73,7 @@ if (isset($useMap)) {
   echo('<script src="http://api.map.baidu.com/api?type=quick&amp;ak=bUPrignlRAdskUaqex5FEfem&amp;v=1.0"></script>');
 }
 echo('<script src="' . $mainJsUrl . '"></script>');
-echo('<script src="' . $dataJsUrl . '"></script>');
+// echo('<script src="' . $dataJsUrl . '"></script>');
 if (isset($helperJsUrl)) {
   echo('<script src="' . $helperJsUrl . '"></script>');
 }
@@ -81,15 +81,14 @@ if (isset($helperJsUrl)) {
   </body>
   <script src="http://hm.baidu.com/h.js?7ba039077e4ada3e97c58d3dc522a7a6" async="async"></script>
   <script>
-  !function(){if("undefined"!=typeof alog){var e=localStorage,t=e.legendUser;(!t||t.length>30)&&(t=e.legendUser=Number(new Date).toString(36)+Math.random().toString(36).slice(3,7)),alog("tr.create",{postUrl:"http://socketapi.duapp.com/pv/<?php echo htmlentities($legendId) ?>/"+t}),alog("tr.send","pageview")}}();
+  !function(){if("undefined"!=typeof alog){var e=localStorage,t=e.legendUser;(!t||t.length>30)&&(t=e.legendUser=Number(new Date).toString(36)+Math.random().toString(36).slice(3,7)),alog("tr.create",{postUrl:"http://socketapi.duapp.com/pv/<?=_j($id)?>/"+t}),alog("tr.send","pageview")}}();
   </script>
 <?php
   $data = $data;
 ?>
 <script src="http://static2.searchbox.baidu.com/static/searchbox/openjs/aio.js?t=20150907"></script>
-<<script src = "<?= $legendConfig['mainJsUrl']?>"></script>
 <script>
-var data = <?= json_encode($data);?>
+var data = <?= json($data);?>
 legend.init(data);
 </script>
 </html>
