@@ -130,6 +130,14 @@ exports.genTempete = function (userParams, pageConfig) {
         cpFun();
     }
     else {
+
+        /**
+         *  和勇叔讨论把逻辑修改放在templte 中
+         * 对公用的数据的修改逻辑放到模板的control中
+         * 这样每次重新生成control 文件
+         */
+
+        return false;
         console.log(chalk.yellow('template alreay exists => ' + templatePath));
         var rl = readline.createInterface({
             input:process.stdin,
