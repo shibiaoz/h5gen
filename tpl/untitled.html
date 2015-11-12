@@ -1,0 +1,141 @@
+<?php
+/* vim: set expandtab tabstop=4 shiftwidth=4: */
+// +----------------------------------------------------------------------+
+// | PHP version 5                                                        |
+// +----------------------------------------------------------------------+
+// | Copyright (c) 1997-2004 The PHP Group                                |
+// +----------------------------------------------------------------------+
+// | This source file is subject to version 3.0 of the PHP license,       |
+// | that is bundled with this package in the file LICENSE, and is        |
+// | available through the world-wide-web at the following url:           |
+// | http://www.php.net/license/3_0.txt.                                  |
+// | If you did not receive a copy of the PHP license and are unable to   |
+// | obtain it through the world-wide-web, please send a note to          |
+// | license@php.net so we can mail you a copy immediately.               |
+// +----------------------------------------------------------------------+
+// | Authors: Original Author <author@example.com>                        |
+// |          Your Name <you@example.com>                                 |
+// +----------------------------------------------------------------------+
+//
+// $Id:$
+/**
+ * @desp : 我的legend
+ * @author: zhangshibiao
+ * @since: 2015-11-03 09:24
+ */
+/**
+ * 结合legend 生成的数据结构
+ * {
+ *    "version": "2",
+ *    "id": "28d4f3ca-7643-11e5-85d7-70e2840c1e14",
+ *    "createTime": "2015-10-19 17:24:12",
+ *    "updateTime": "2015-10-27 14:04:52",
+ *    "title": "我的legend",
+ *    "description": "",
+ *    "iconUrl": "http://hiphotos.baidu.com/doc/pic/item/ac345982b2b7d0a25e4d29d8cdef76094a369aea.jpg",
+ *    "useZepto": true,
+ *    "useSwiper": true,
+ *    "useParallax": false,
+ *    "useMap": false,
+ *    "helperJs": "",
+ *    "dataJsUrl": "http://tb1.bdstatic.com/legend/af0a62447950b823fd9b9158b5ffc19a_data.js",
+ *    "mainJsUrl": "http://tb1.bdstatic.com/legend/0dfaae7bc5cb7365d87dcbc18dd4be87_main.js",
+ *    "mainCssUrl": "http://tb1.bdstatic.com/legend/2e3868c4dc8dee08795587080e3c3ab3_main.css",
+ *    "dpPage": "lg-28d4f3ca7643",
+ *    "data": legend init中的数据，
+ * }
+ */
+PhizView::page('sglobal:page/Index.class.php')->assign($this->_arrVars)->fetch();
+$pageConfig = array(
+    "version" => "2",
+    "id" => "28d4f3ca-7643-11e5-85d7-70e2840c1e14",
+    "createTime" => "2015-10-19 17:24:12",
+    "updateTime" => "2015-10-27 14:04:52",
+    "title" => "我的legend",
+    "description" => "",
+    "iconUrl" => "http://hiphotos.baidu.com/doc/pic/item/ac345982b2b7d0a25e4d29d8cdef76094a369aea.jpg",
+    "useZepto" => true,
+    "useSwiper" => true,
+    "useParallax" => false,
+    "useMap" => false,
+    "helperJs" => "",
+    "dataJsUrl" => "http://tb1.bdstatic.com/legend/af0a62447950b823fd9b9158b5ffc19a_data.js",
+    "mainJsUrl" => "http://tb1.bdstatic.com/legend/0dfaae7bc5cb7365d87dcbc18dd4be87_main.js",
+    "mainCssUrl" => "http://tb1.bdstatic.com/legend/2e3868c4dc8dee08795587080e3c3ab3_main.css",
+    "dpPage" => "lg-28d4f3ca7643",
+    "name" => "gen-legend-tpl",
+    "data" => array(
+        "attributes" => array() ,
+        "backStage" => array() ,
+        "frontStage" => array() ,
+        "pages" => array(
+            array(
+                "attributes" => array(
+                    "background" => "#FFF"
+                ) ,
+                "components" => array(
+                    array(
+                        "type" => "image",
+                        "surface" => array(
+                            "x" => 46,
+                            "y" => 19,
+                            "width" => 240,
+                            "height" => 188,
+                            "borderSize" => 1,
+                            "borderColor" => "black",
+                            "fill" => "transparent"
+                        ) ,
+                        "attributes" => array(
+                            "src" => "http://hiphotos.baidu.com/doc/pic/item/c75c10385343fbf2f3458ebeb57eca8064388fc5.jpg",
+                            "size" => 0,
+                            "filename" => "",
+                            "touchevent" => "false",
+                            "playAudio" => "false",
+                            "audio" => "http://wenku.baidu.com/bookeditor/interface/thirdgetaudio?token=ab6451233c78be7912705baf651a333b",
+                            "translateX" => 0,
+                            "translateY" => 0,
+                            "scale" => 1
+                        ) ,
+                        "events" => array()
+                    ) ,
+                    array(
+                        "type" => "label",
+                        "surface" => array(
+                            "x" => 80,
+                            "y" => 293,
+                            "width" => 266,
+                            "height" => 80,
+                            "borderSize" => 1,
+                            "borderColor" => "black",
+                            "fill" => "transparent"
+                        ) ,
+                        "attributes" => array(
+                            "html" => "<p style=\"text-align: left;\"><span style=\"font-size: 36px; background-color: rgba(222, 55, 48, 0.568627);\">贴吧粉丝节</span></p>",
+                            "verticalAlign" => "top",
+                            "shadow" => "false",
+                            "shadowOffsetX" => 3,
+                            "shadowOffsetY" => 3,
+                            "shadowBlur" => 0,
+                            "shadowColor" => "gray"
+                        ) ,
+                        "events" => array()
+                    )
+                )
+            ),
+        )
+    )
+);
+/**
+ * 在这里自定义的业务逻辑，把所有的数据处理放在control来处理
+ * 不去手动改变lgend的模板数据
+ */
+/**
+ * pageConfig,
+ * 把pageconfig中数据在这里传到模板中
+ *
+ */
+foreach ($pageConfig as $key => $value) {
+    $this->assign($key, $value);
+}
+$this->display("gen-legend-tpl/gen-legend-tpl.php");
+

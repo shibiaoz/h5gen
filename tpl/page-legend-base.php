@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<?php
+$legApiPhp = $__widget__->load('h5legen_interface', array('data' => $data));
+/**
+ * your business logic
+ */
+
+?>
 <html>
   <head>
     <meta charset="utf-8">
@@ -50,6 +57,7 @@ if ($useSwiper) {
 }
 echo('<link type="text/css" rel="stylesheet" href="' . $mainCssUrl . '">');
 ?>
+<?= HTML::css('lib/h5legen_interface/h5legen_interface.css', 'splatform')?>
     <div class="lg-container">
       <div class="lg-back-stage">
         <div class="lg-backface"></div>
@@ -83,12 +91,22 @@ if (isset($helperJsUrl)) {
   <script>
   !function(){if("undefined"!=typeof alog){var e=localStorage,t=e.legendUser;(!t||t.length>30)&&(t=e.legendUser=Number(new Date).toString(36)+Math.random().toString(36).slice(3,7)),alog("tr.create",{postUrl:"http://socketapi.duapp.com/pv/<?=_j($id)?>/"+t}),alog("tr.send","pageview")}}();
   </script>
-<?php
-  $data = $data;
-?>
+<?= HTML::js('lib/h5legen_interface/h5legen_interface.js', 'splatform')?>
 <script src="http://static2.searchbox.baidu.com/static/searchbox/openjs/aio.js?t=20150907"></script>
+<?
+/**
+ * transfer data to js
+ */
+$legendData = $legApiPhp->getData();
+?>
 <script>
-var data = <?= json($data);?>
-legend.init(data);
+var legendData = <?= json($legendData);?>;
+legend.init(legendData);
+legApi(function () {
+    /**
+     * your  business logic
+     */
+
+});
 </script>
 </html>

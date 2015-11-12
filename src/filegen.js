@@ -32,6 +32,32 @@ function getData (jsUrl) {
     });
     return promise;
 }
+/**
+ * 生成最基础的 control 模板，可以自定义
+ * 存在logic-tpls 文件夹下
+ * @param  {[type]} userParams [description]
+ * @return {[type]}            [description]
+ */
+exports.genControlRaw = function  (userParams) {
+    var logciTpls = path.relative(pwd, 'logic-tpls/');
+    if (!fs.existsSync(logciTpls)) {
+        shell.mkdir('-p', logciTpls);
+    }
+    var data = {
+        desp: userParams.title || '入口文件',
+        author: userParams.author,
+        time: moment(new Date()).format('YYYY-MM-DD HH:mm'),
+        pageConfig: '<%=pageConfig%>',
+        template: '<%=template%>'
+    }
+    var pageName = userParams.title || 'test';
+    var controlTplStr = fs.readFileSync(CONTROLPATH).toString();
+    var desControlPath = path.join(pwd, 'logic-tpls/' + pageName + FILESUFFIX);
+    var toWriteStr = tplEng.strRep(controlTplStr, data);
+    fs.writeFileSync(desControlPath, toWriteStr,{ flags: 'w'});
+}
+
+
 
 
 /**
@@ -45,13 +71,13 @@ function getData (jsUrl) {
 exports.genControl = function (userParams, pageConfig) {
     console.log(chalk.yellow('function genControl...'));
     var deferred = Q.defer();
-    // console.log('------------');
-    // console.log(pageConfig);
-    // console.log('------------');
-
+    var controlName = userParams.controlName;
+    var selConPath = path.join(pwd, 'logic-tpls/' + controlName + '.php');
     // pageConfig.name = 'test';
     var pageName = pageConfig && (pageConfig.name || pageConfig.desp || 'test');
-    var controlTplStr = fs.readFileSync(CONTROLPATH).toString();
+    console.log(chalk.green(selConPath));
+    var controlTplStr = fs.readFileSync(selConPath).toString();
+    console.log(controlTplStr);
     var desControlPath = path.join(pwd, 'control/' + pageName + FILESUFFIX);
     // pageConfig.data = {}; // 扩展pageconfig的值
     // var dataJsUrl = pageConfig && pageConfig['dataJsUrl'];

@@ -28,7 +28,8 @@
     "lodash": "^3.10.1",
     "moment": "^2.10.6",
     "q": "^1.4.1",
-    "shelljs": "^0.5.3"
+    "shelljs": "^0.5.3",
+    "yamljs": "^0.2.4"
   },
   "devDependencies": {
     "asciimo": "^0.3.1",
