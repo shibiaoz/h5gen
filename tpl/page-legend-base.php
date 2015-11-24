@@ -91,7 +91,6 @@ if (isset($helperJsUrl)) {
   <script>
   !function(){if("undefined"!=typeof alog){var e=localStorage,t=e.legendUser;(!t||t.length>30)&&(t=e.legendUser=Number(new Date).toString(36)+Math.random().toString(36).slice(3,7)),alog("tr.create",{postUrl:"http://socketapi.duapp.com/pv/<?=_j($id)?>/"+t}),alog("tr.send","pageview")}}();
   </script>
-<?= HTML::js('lib/h5legen_interface/h5legen_interface.js', 'splatform')?>
 <script src="http://static2.searchbox.baidu.com/static/searchbox/openjs/aio.js?t=20150907"></script>
 <?
 /**
@@ -99,7 +98,12 @@ if (isset($helperJsUrl)) {
  */
 $legendData = $legApiPhp->getData();
 ?>
+<?= HTML::js('lib/h5legen_interface/h5legen_interface.js', 'splatform')?>
 <script>
+/**
+ * 这里写代码，一定要严格，该分号的分号，
+ * 注释不要用//
+ */
 var legendData = <?= json($legendData);?>;
 legend.init(legendData);
 legApi(function () {
