@@ -1,3 +1,5 @@
+# 推广页面公用control 抽离配置
+# control template in logic-tpls dir
 desp: '自定义 模板列表'
 tpls:
     -

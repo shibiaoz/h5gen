@@ -37,6 +37,7 @@ function genYaml(outputPath,data) {
     var writeStr = '';
     if (fs.existsSync(outputPath)) {
         // if exists ,push data to object from getList
+        console.log('tpl.yaml alreay exists');
         targetData = getList();
         targetData['tpls'].push(data);
     }
@@ -47,7 +48,9 @@ function genYaml(outputPath,data) {
         !data['tpls'] && (targetData['tpls'] = []) && (targetData['tpls'].push(data));
     }
     console.log(targetData);
-    writeStr = yaml.stringify(targetData, 4);
+    var notes = "# 推广页面公用control 抽离配置\n"
+                + "# control template in logic-tpls dir\n";
+    writeStr = notes + yaml.stringify(targetData, 4);
     fs.writeFileSync(yamlPath,writeStr);
 }
 exports.getList = getList;
