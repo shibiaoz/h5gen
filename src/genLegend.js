@@ -38,6 +38,7 @@ else {
  * @param
  */
 command.commandCenter(function (userParams) {
+    chalk.green("命令行接收参数 => ");
     console.log(userParams);
     if (userParams.genType == 1) {
         // 生成一个自定义的control 文件

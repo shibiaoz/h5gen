@@ -77,7 +77,7 @@ exports.genControl = function (userParams, pageConfig) {
     var pageName = pageConfig && (pageConfig.name || pageConfig.desp || 'test');
     console.log(chalk.green(selConPath));
     var controlTplStr = fs.readFileSync(selConPath).toString();
-    console.log(controlTplStr);
+    // console.log(controlTplStr);
     var desControlPath = path.join(pwd, 'control/' + pageName + FILESUFFIX);
     // pageConfig.data = {}; // 扩展pageconfig的值
     // var dataJsUrl = pageConfig && pageConfig['dataJsUrl'];
@@ -94,6 +94,7 @@ exports.genControl = function (userParams, pageConfig) {
     data.pageConfig = js2php(pageConfig);
     // 读取模板文件，替换值，写入工程的control中
     if (controlTplStr) {
+        console.log(chalk.green(' writing control tpl...'));
         var toWriteStr = tplEng.strRep(controlTplStr, data);
         fs.writeFile(desControlPath, toWriteStr, function (err) {
             if (err) throw err;
@@ -120,13 +121,16 @@ exports.genTempete = function (userParams, pageConfig) {
     var templateDir = path.relative(pwd, 'template/' + pageName);
     var templatePath = path.relative(pwd, templateDir + '/' + pageName + FILESUFFIX);
     var isFileExists = shell.test('-f', templatePath);
-    console.log(chalk.red( templatePath + '=> is exists ' + isFileExists));
+    console.log(chalk.green( templatePath + '=> is exists ' + isFileExists));
     var cpFun = function (src, dest) {
+        console.log(chalk.green('function cpFun...'));
+        console.log(chalk.green('excute shell to mkdir'));
         shell.mkdir('-p', templateDir);
         shell.cp('-f', TMLPATH , templatePath);
         console.log(chalk.green('template genetated success'));
     }
     if (!isFileExists) {
+        console.log(chalk.green("create template dir"))
         cpFun();
     }
     else {

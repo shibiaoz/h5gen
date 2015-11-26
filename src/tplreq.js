@@ -53,7 +53,7 @@ exports.getConfig = function  (config, callback) {
             }
             catch(e) {
                 deferred.reject(e);
-                console.log(chalk.red("请求系统数据失败或Parse 系统JSON士标...."));
+                console.log(chalk.red("请求系统数据失败或Parse JSON 失败...."));
             }
         });
     });
