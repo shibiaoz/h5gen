@@ -72,7 +72,7 @@ exports.genControl = function (userParams, pageConfig) {
     console.log(chalk.yellow('function genControl...'));
     var deferred = Q.defer();
     var controlName = userParams.controlName;
-    var selConPath = path.join(pwd, 'logic-tpls/' + controlName + '.php');
+    var selConPath = path.join(pwd, 'logic-tpls/' + controlName + '.tpl');
     // pageConfig.name = 'test';
     var pageName = pageConfig && (pageConfig.name || pageConfig.desp || 'test');
     console.log(chalk.green(selConPath));
